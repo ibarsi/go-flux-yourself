@@ -1,6 +1,6 @@
 {
   "name": "go-flux-yourself",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A super-lite implementation of the Flux architecture with a React component wrapper.",
   "main": "dist/index.js",
   "scripts": {
