@@ -1,0 +1,35 @@
+{
+  "name": "go-flux-yourself",
+  "version": "0.0.0",
+  "description": "A super-simple, lite implementation of the Flux architecture.",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "npm run clean && babel src/ -s -D -d dist/",
+    "dev": "webpack-dev-server --content-base demo/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibarsi/go-flux-yourself"
+  },
+  "author": "Igor Barsi <ibarsi92@gmail.com> (https://github.com/ibarsi)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ibarsi/go-flux-yourself/issues"
+  },
+  "dependencies": {
+    "lodash": "4.17.4",
+    "pubsub-js": "1.5.6",
+    "react": "15.5.3",
+    "uid": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-loader": "6.4.1",
+    "babel-preset-env": "1.3.3",
+    "babel-preset-react": "6.24.1",
+    "react-dom": "15.5.3",
+    "webpack": "2.3.3",
+    "webpack-dev-server": "2.4.2"
+  }
+}
