@@ -8,21 +8,27 @@ import mergeWith from 'lodash/mergeWith';
 export default function Reducer(options = {}) {
     const defaults = {
         initial_state: {},
-        actions: {}
+        actions: {
+            default: state => state
+        }
     };
 
-    const config = Object.assign({}, defaults, options);
+    const config = extend(defaults, options);
 
     return (state, action) => {
         if (state === undefined) { return config.initial_state; }
 
         const new_state = extend(config.initial_state, state);
 
-        if (action === undefined) { return new_state; }
+        if (action === undefined) { return config.actions.default(new_state); }
 
         const { type, payload } = action;
 
-        return config.actions[ type ](new_state, payload) || config.actions.default(new_state, payload);
+        const func = config.actions[ type ];
+
+        if (func === undefined) { return config.actions.default(new_state, payload); }
+
+        return func(new_state, payload) || config.actions.default(new_state, payload);
     };
 }
 
