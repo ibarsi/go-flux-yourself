@@ -3,8 +3,10 @@
 ---------------------------------------------- */
 
 import React from 'react';
-import { subscribe, publish } from 'pubsub-js';
+import eventstop from 'eventstop';
 import uid from 'uid';
+
+const { on, emit } = eventstop();
 
 const container = reducer =>
     WrappedComponent => {
@@ -13,7 +15,7 @@ const container = reducer =>
         const new_props = {
             module_instance,
             dispatch(value) {
-                publish(module_instance, value);
+                emit(module_instance, value);
             }
         };
 
@@ -27,7 +29,7 @@ const container = reducer =>
 
                 this.setStateSerial = this.setStateSerial.bind(this);
 
-                subscribe(new_props.module_instance, (type, actions) => {
+                on(new_props.module_instance, actions => {
                     if (!Array.isArray(actions)) {
                         Promise.resolve(reducer(this.state.state, actions))
                             .then(new_state => this.setState({ state: new_state }));

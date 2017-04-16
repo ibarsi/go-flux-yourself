@@ -18,8 +18,8 @@
     "url": "https://github.com/ibarsi/go-flux-yourself/issues"
   },
   "dependencies": {
+    "eventstop": "2.1.0",
     "lodash": "4.17.4",
-    "pubsub-js": "1.5.6",
     "react": "15.5.3",
     "uid": "0.0.2"
   },
