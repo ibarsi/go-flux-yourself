@@ -1,5 +1,6 @@
 # Project
 **/node_modules
+**/flow-typed
 **/dist
 
 # Git

@@ -1,0 +1,10 @@
+[ignore]
+.*/node_modules/.*
+.*/dist/.*
+.*\.config\.js
+
+[include]
+
+[libs]
+
+[options]
