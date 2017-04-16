@@ -1,6 +1,7 @@
 /* ---------------------------------------------
     INDEX
 ---------------------------------------------- */
+// @flow
 
 import Action from './action';
 import Reducer from './reducer';

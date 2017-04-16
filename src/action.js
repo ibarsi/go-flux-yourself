@@ -1,12 +1,18 @@
 /* ---------------------------------------------
     ACTION
 ---------------------------------------------- */
+// @flow
 
-export default function Action(type) {
-    return payload => {
-        return {
+export type TAction = {
+    type: string,
+    payload: mixed
+};
+
+const Action = (type: string) =>
+    (payload: mixed): TAction =>
+        ({
             type,
             payload
-        };
-    };
-}
+        });
+
+export default Action;
