@@ -74,8 +74,8 @@ const DemoContainer = container(reducer)(<Demo />);
 Higher-Order React Component, which takes a reducer and returns a function that wraps a React component with the functionality needed to handle actions and maintain state through the logic defined in the reducer.
 
 The wrapped component is provided with the following props:
-* `state` - This is essentially the "real" state of the component. This is not to be confused with the `this.state` property provided when extending `React.Component`. All that state management is handled by this component wrapper, so the state _your_ components should be concerned with (as defined by your actions and reducers) can be found here.
-* `dispatch` - Plain-old event emitter used to dispatch your actions. These actions are then interpreted by your reducer and the appropriate state mutations are applied and stored in the `state` prop.
+* `state: Object` - This is essentially the "real" state of the component. This is not to be confused with the `this.state` property provided when extending `React.Component`. All that state management is handled by this component wrapper, so the state _your_ components should be concerned with (as defined by your actions and reducers) can be found here.
+* `dispatch: (action) => void` - Plain-old event emitter used to dispatch your actions. These actions are then interpreted by your reducer and the appropriate state mutations are applied and stored in the `state` prop.
 
 Example usage:
 
