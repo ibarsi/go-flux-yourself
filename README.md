@@ -75,7 +75,7 @@ Higher-Order React Component, which takes a reducer and returns a function that 
 
 The wrapped component is provided with the following props:
 * `state: Object` - This is essentially the "real" state of the component. This is not to be confused with the `this.state` property provided when extending `React.Component`. All that state management is handled by this component wrapper, so the state _your_ components should be concerned with (as defined by your actions and reducers) can be found here.
-* `dispatch: (action) => void` - Plain-old event emitter used to dispatch your actions. These actions are then interpreted by your reducer and the appropriate state mutations are applied and stored in the `state` prop.
+* `dispatch: (action: Object | Object[]) => void` - Plain-old event emitter used to dispatch an action. This action is then interpreted by your reducer and the appropriate state mutations are applied and stored in the `state` prop. It is also possible (although, not recommended) to dispatch an array of actions. These actions are then interpreted and applied synchronously. **NOTE:** This will cause multiple _synchronous_ renders to all nested components and should be avoided if possible.
 
 Example usage:
 
