@@ -5,9 +5,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Action from '../src/action';
-import Reducer from '../src/reducer';
-import container from '../src/container';
+import { Action, Reducer, container } from '../src'; // 'go-flux-yourself'
 
 // ACTIONS
 
