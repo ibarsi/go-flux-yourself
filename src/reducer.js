@@ -26,9 +26,11 @@ const Reducer = (options?: IOptions = defaults): TReducer => {
     const config = options === defaults ? options : extend(defaults, options);
 
     return (state, action, props) => {
-        if (state === undefined) { return config.initial_state(props); }
+        const initial_state = config.initial_state(props);
 
-        const new_state = extend(config.initial_state(props), state);
+        if (state === undefined) { return initial_state; }
+
+        const new_state = extend(initial_state, state);
 
         if (action === undefined) { return config.actions.default(new_state); }
 
