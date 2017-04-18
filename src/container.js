@@ -32,12 +32,12 @@ const container = (reducer: TReducer) =>
                 super(props);
 
                 this.state = {
-                    state: reducer()
+                    state: reducer(undefined, undefined, props)
                 };
 
                 on(new_props.module_instance, actions => {
                     if (!Array.isArray(actions)) {
-                        Promise.resolve(reducer(this.state.state, actions))
+                        Promise.resolve(reducer(this.state.state, actions, props))
                             .then(new_state => this.setState({ state: new_state }));
                         return;
                     }
@@ -55,7 +55,7 @@ const container = (reducer: TReducer) =>
             setStateSerial(old_state: Object, [ action, ...actions ]: TAction[]) {
                 if (action === undefined) { return; }
 
-                Promise.resolve(reducer(old_state, action))
+                Promise.resolve(reducer(old_state, action, this.props))
                     .then(new_state => this.setState({ state: new_state }, this.setStateSerial(new_state, actions)));
             }
 

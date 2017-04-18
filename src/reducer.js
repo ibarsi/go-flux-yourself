@@ -9,14 +9,14 @@ import { mergeWith } from 'lodash';
 import type { TAction } from './action';
 
 interface IOptions {
-    initial_state: Object,
+    initial_state: (props?: Object) => Object,
     actions: Object
 }
 
-export type TReducer = (state?: Object, action?: TAction) => Object;
+export type TReducer = (state?: Object, action?: TAction, props?: Object) => Object;
 
 const defaults: IOptions = {
-    initial_state: {},
+    initial_state: () => ({}),
     actions: {
         default: state => state
     }
@@ -25,10 +25,12 @@ const defaults: IOptions = {
 const Reducer = (options?: IOptions = defaults): TReducer => {
     const config = options === defaults ? options : extend(defaults, options);
 
-    return (state, action) => {
-        if (state === undefined) { return config.initial_state; }
+    return (state, action, props) => {
+        const initial_state = config.initial_state(props);
 
-        const new_state = extend(config.initial_state, state);
+        if (state === undefined) { return initial_state; }
+
+        const new_state = extend(initial_state, state);
 
         if (action === undefined) { return config.actions.default(new_state); }
 
