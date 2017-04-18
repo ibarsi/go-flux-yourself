@@ -40,7 +40,7 @@ dispatch(increment(1));
 Factory function used to create a "reducer function", which is then passed into the React container wrapper and used internally to manage state.
 
 The `options` argument is expected to provide the following properties:
-* `initial_state: Object` - This is the expected state for the wrapped React component at the beginning of it's lifecycle.
+* `initial_state: (props?: Object) => Object` - This is the function that generates the expected state for the wrapped React component at the beginning of it's lifecycle. The function defined has access to the calling component's props (if any exist) to assist in initial state generation.
 * `actions: Object` - These are the expected state-mutating actions to be performed on the wrapped React component. The properties on this object should follow the following type annotation: `[type: string]: (state: Object, payload: mixed) => Object`.
 
 Example usage:
