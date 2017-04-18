@@ -53,9 +53,9 @@ const INCREMENT = 'INCREMENT';
 
 // Reducer with options.
 const reducer = Reducer({
-    initial_state: {
+    initial_state: () => ({
         counter: 0
-    },
+    }),
     actions: {
         [ INCREMENT ]: (state, payload) =>
             Object.assign({}, state, {
@@ -66,7 +66,7 @@ const reducer = Reducer({
 });
 
 // Hypothetical container wrapper invocation.
-const DemoContainer = container(reducer)(<Demo />);
+const DemoContainer = container(reducer)(Demo);
 ```
 
 ### container(reducer)(Component)
@@ -80,10 +80,12 @@ The wrapped component is provided with the following props:
 Example usage:
 
 ```js
+import { container } from 'go-flux-yourself';
+
 // Component to be wrapped (notice the props available).
 const Demo = ({ state, dispatch }) =>
     <div>
-        <button type="button" onClick={ () => dispatch(increment(1)) }>
+        <button type="button" onClick={ () => dispatch(increment(1)) /* hypothetical "action" being dispatched */ }>
             Increment
         </button>
 
@@ -92,7 +94,7 @@ const Demo = ({ state, dispatch }) =>
         </p>
     </div>;
 
-// The invocation of the wrapper.
+// Invocation of the wrapper with hypothetical "reducer".
 const DemoContainer = container(reducer)(Demo);
 
 // Render the newly wrapped component!
