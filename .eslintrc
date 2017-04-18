@@ -1,0 +1,39 @@
+{
+    "parser": "babel-eslint",
+
+    "env": {
+        "browser": true,     // browser global variables.
+        "node": true,        // Node.js global variables and Node.js-specific rules.
+        "mocha": true,       // adds all of the Mocha testing global variables.
+        "es6": true          // enable es6 keywords, except module.
+    },
+
+    "plugins": [
+        "flowtype",
+        "react"
+    ],
+
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:flowtype/recommended"
+    ],
+
+    "parserOptions": {
+        "sourceType": "module"
+    },
+
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": true
+        }
+    },
+
+    "rules": {
+        // GENERAL
+        "no-console": 0,
+
+        // REACT
+        "react/prop-types": 0
+    }
+}
