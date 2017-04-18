@@ -18,9 +18,9 @@ const increment = Action(INCREMENT);
 // REDUCER
 
 const reducer = Reducer({
-    initial_state: {
+    initial_state: () => ({
         counter: 0
-    },
+    }),
     actions: {
         [ INCREMENT ]: (state, payload) =>
             Object.assign({}, state, {
