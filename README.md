@@ -41,7 +41,9 @@ Factory function used to create a "reducer function", which is then passed into 
 
 The `options` argument is expected to provide the following properties:
 * `initial_state: (props?: Object) => Object` - This is the function that generates the expected state for the wrapped React component at the beginning of it's lifecycle. The function defined has access to the calling component's props (if any exist) to assist in initial state generation.
-* `actions: Object` - These are the expected state-mutating actions to be performed on the wrapped React component. The properties on this object should follow the following type annotation: `[type: string]: (state: Object, payload: mixed) => Object`.
+* `actions: Object` - These are the expected state-mutating actions to be performed on the wrapped React component. The properties on this object should follow the following type annotation: `[type: string]: (state: Object, payload: mixed) => Object`. There are some "built-in" actions that have custom functionality:
+    * `default`: Executed when the action type (ie. INCREMENT) is not defined. Think of this as a default case for your switch statements - it will be invoked when the functionality of an action dispatched has not been configured.
+    * `finally`: Executed after every action, _including_ `default`.
 
 Example usage:
 
@@ -61,7 +63,8 @@ const reducer = Reducer({
             Object.assign({}, state, {
                 counter: state.counter + payload
             }),
-        default: state => state
+        default: state => state,
+        finally: state => state
     }
 });
 
