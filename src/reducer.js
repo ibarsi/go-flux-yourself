@@ -18,12 +18,15 @@ export type TReducer = (state?: Object, action?: TAction, props?: Object) => Obj
 const defaults: IOptions = {
     initial_state: () => ({}),
     actions: {
-        default: state => state
+        default: state => state,
+        finally: state => state
     }
 };
 
 const Reducer = (options?: IOptions = defaults): TReducer => {
     const config = options === defaults ? options : extend(defaults, options);
+
+    const execute = (action: () => {}, state: Object, payload?: mixed): Object => config.actions.finally(action(state, payload));
 
     return (state, action, props) => {
         const initial_state = config.initial_state(props);
@@ -32,15 +35,15 @@ const Reducer = (options?: IOptions = defaults): TReducer => {
 
         const new_state = extend(initial_state, state);
 
-        if (action === undefined) { return config.actions.default(new_state); }
+        if (action === undefined) { return execute(config.actions.default, new_state); }
 
         const { type, payload } = action;
 
         const func = config.actions[ type ];
 
-        if (func === undefined) { return config.actions.default(new_state, payload); }
+        if (func === undefined) { return execute(config.actions.default, new_state, payload); }
 
-        return func(new_state, payload) || config.actions.default(new_state, payload);
+        return execute(func, new_state, payload) || execute(config.actions.default, new_state, payload);
     };
 };
 

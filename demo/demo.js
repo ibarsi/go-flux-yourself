@@ -20,11 +20,18 @@ const reducer = Reducer({
         counter: 0
     }),
     actions: {
+        /* Action used to increment state value. */
         [ INCREMENT ]: (state, payload) =>
             Object.assign({}, state, {
                 counter: state.counter + payload
             }),
-        default: state => state
+        /* Default action, demonstration only. */
+        default: state => state,
+        /* Finally action, logs state to console on every change. */
+        finally: state => {
+            console.log(state);
+            return state;
+        }
     }
 });
 
