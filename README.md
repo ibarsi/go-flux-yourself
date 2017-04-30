@@ -7,6 +7,12 @@ The library's general design comes from other personal implementations of this a
 ## Install
 
 ```
+yarn add go-flux-yourself
+```
+
+or
+
+```
 npm install go-flux-yourself
 ```
 
@@ -111,7 +117,7 @@ Fully functioning demo can be found under `/demo`. To run locally, see steps bel
 ## GETTING STARTED
 
 After cloning the repo, run the following commands:
-* `npm install` - Install all dependencies.
+* `yarn install` - Install all dependencies.
 * `flow-typed install` - Install flow type annotations for typed dependencies.
 
 There are several `npm scripts` that are configured for development, listed below:
