@@ -36,13 +36,13 @@ const container = (reducer: TReducer) =>
                 };
 
                 on(new_props.module_instance, actions => {
-                    if (!Array.isArray(actions)) {
-                        Promise.resolve(reducer(this.state.state, actions, props))
-                            .then(new_state => this.setState({ state: new_state }));
+                    if (Array.isArray(actions)) {
+                        this.setStateSerial(this.state.state, actions);
                         return;
                     }
 
-                    this.setStateSerial(this.state.state, actions);
+                    reducer(this.state.state, actions, props)
+                        .then(new_state => this.setState({ state: new_state }));
                 });
             }
 
@@ -55,7 +55,7 @@ const container = (reducer: TReducer) =>
             setStateSerial(old_state: Object, [ action, ...actions ]: TAction[]) {
                 if (action === undefined) { return; }
 
-                Promise.resolve(reducer(old_state, action, this.props))
+                reducer(old_state, action, this.props)
                     .then(new_state => this.setState({ state: new_state }, this.setStateSerial(new_state, actions)));
             }
 
