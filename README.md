@@ -1,5 +1,7 @@
 # go-flux-yourself
 
+[![npm](https://img.shields.io/npm/v/go-flux-yourself.svg?style=flat-square)](https://www.npmjs.com/package/go-flux-yourself)
+
 `go-flux-yourself` is a light implementation of the [Flux](https://facebook.github.io/flux/) architecture for uni-directional state management with a React component wrapper included. The tools provided by this library allow you to write pure functional components and define state management through the use of reducers (also pure functions), leaving all the dirty work under the hood where it belongs!
 
 The library's general design comes from other personal implementations of this architecture that covered fairly simple, straightforward use cases that would not make full use of all the "bells and whistles" provided by some other, more popular implementations (ie. Redux). For the most part, this library is a way for me to play around with new tech and expand my knowledge ⚡️
