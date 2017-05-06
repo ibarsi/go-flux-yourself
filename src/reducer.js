@@ -10,7 +10,8 @@ import type { TAction } from './action';
 
 interface IOptions {
     initial_state: (props?: Object) => Object,
-    actions: Object
+    actions: Object,
+    catch: (error: mixed) => void
 }
 
 export type TReducer = (state?: Object, action?: TAction, props?: Object) => Object;
@@ -20,13 +21,22 @@ const defaults: IOptions = {
     actions: {
         default: state => state,
         finally: state => state
-    }
+    },
+    catch: console.error
 };
 
 const Reducer = (options?: IOptions = defaults): TReducer => {
     const config = options === defaults ? options : extend(defaults, options);
 
-    const execute = (action: () => {}, state: Object, payload?: mixed): Object => config.actions.finally(action(state, payload));
+    const execute = async (action: () => {}, state: Object, payload?: mixed): Object => {
+        try {
+            return await Promise.resolve(config.actions.finally(action(state, payload)));
+        } catch (error) {
+            config.catch(error);
+
+            return state;
+        }
+    };
 
     return (state, action, props) => {
         const initial_state = config.initial_state(props);

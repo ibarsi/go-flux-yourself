@@ -32,7 +32,8 @@ const reducer = Reducer({
             console.log(state);
             return state;
         }
-    }
+    },
+    catch: error => console.error('ERROR', error)
 });
 
 // COMPONENT
